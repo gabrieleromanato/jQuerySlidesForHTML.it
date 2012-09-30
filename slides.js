@@ -37,6 +37,17 @@ var Slides = {
 					});
 				}, 1000);
 			});
+		},
+		positionButtons: function() {
+			var prev = Slides.Elements.previous;
+			var next = Slides.Elements.next;
+			var totalHeight = $(window).height();
+			prev.css({
+				top: (totalHeight / 2) - (prev.height() / 2)
+			});
+			next.css({
+				top: (totalHeight / 2) - (next.height() / 2)
+			});
 		}
 	},
 	fn: {
@@ -51,6 +62,9 @@ var Slides = {
 				width: totalWidth,
 				height: totalHeight
 			});
+		},
+		setButtonPositions: function() {
+			Slides.Utils.positionButtons();
 		},
 		nextBtn: function() {
 			var btn = Slides.Elements.next;
@@ -118,4 +132,9 @@ var Slides = {
 };
 $(function() {
 	Slides.init();
+	if (window.orientation) {
+		$(window).bind('orientationchange', function() {
+			Slides.Utils.positionButtons();
+		});
+	}
 });
