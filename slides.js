@@ -48,6 +48,16 @@ var Slides = {
 			next.css({
 				top: (totalHeight / 2) - (next.height() / 2)
 			});
+		},
+		swiping: function() {
+			$('#site').swipe({
+				swipeLeft: function(event, direction, distance, duration, fingerCount) {
+					Slides.Elements.previous.click();
+				},
+				swipeRight: function(event, direction, distance, duration, fingerCount) {
+					Slides.Elements.next.click();
+				}
+			});
 		}
 	},
 	fn: {
@@ -136,5 +146,6 @@ $(function() {
 		$(window).bind('orientationchange', function() {
 			Slides.Utils.positionButtons();
 		});
+		Slides.Utils.swiping();
 	}
 });
